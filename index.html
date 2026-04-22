@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lezzet Durağı | Menü</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Anne Eli Lezzetleri - Günlük Menü</title>
+
+    <meta property="og:title" content="👉 Sitemize Girmek İçin Tıklayın 👈">
+<meta property="og:description" content="Anne Eli Lezzetleri - Taze ve Sıcak Ev Yemekleri">
+<meta property="og:image" content="https://moonlit-fox-57cc98.netlify.app/foto/kofte.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#d35400">
+ <style>
+    :root { --ana: #e67e22; --wp: #25D366; --bg: #f8f9fa; --mavi: #3498db; --text: #2c3e50; }
+    
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; color: var(--text); padding-bottom: 20px; }
+    
+    header { background: white; padding: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    h1 { margin: 0; font-size: 1.1rem; color: var(--ana); }
+
+    .container { width: 100%; padding: 10px; }
+    .section-title { font-size: 1rem; margin: 15px 0 10px; padding-left: 8px; border-left: 3px solid var(--ana); }
+
+    /* GÜNÜN MENÜSÜ - EKRANI KAPLASIN */
+    .hero-section { width: 100%; margin-bottom: 20px; }
+    .hero-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .hero-card .img-box { height: 200px; }
+
+    /* DİĞER YEMEKLER - MOBİLDE YAN YANA 2'Lİ */
+    .grid-section { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); /* BURASI SİHİRLİ NOKTA: EKRANI 2'YE BÖLER */
+        gap: 10px; /* Kartlar arasındaki boşluk */
+    }
+
+    /* Tablet ve PC'de 3'lü olsun */
+    @media (min-width: 900px) {
+        .grid-section { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* KART TASARIMI (Mobilde küçük olması için ayarlandı) */
+    .card { background: white; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #eee; }
+    .img-box { width: 100%; height: 120px; position: relative; background: #ddd; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .price { position: absolute; bottom: 5px; right: 5px; background: var(--ana); color: white; padding: 2px 8px; border-radius: 10px; font-weight: 600; font-size: 0.75rem; }
+
+    .info { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .info h2 { font-size: 1rem; margin: 0 0 5px 0; }
+    .info h3 { font-size: 0.85rem; margin: 0 0 5px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } /* Uzun isimleri keser */
+    .info p {
+    font-size: 0.7rem;
+    color: #777;
+    margin: 0 0 10px 0;
+    
+    /* Metin Sınırlama (Line Clamp) Bloğu */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    
+    /* Sabit yükseklik yerine min-height veya line-height kullanmak daha esnektir */
+    line-height: 1.2; 
+    max-height: 2.4em; /* 2 satır x 1.2 line-height */
+}
+
+    /* BUTONLAR - YAN YANA 2'Lİ KART İÇİN KÜÇÜLTÜLDÜ */
+    .btn-group { display: flex; flex-direction: column; gap: 5px; } /* Mobilde üst üste daha iyi durur */
+    .btn { padding: 8px 2px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; font-size: 0.75rem; text-align: center; }
+    .btn-order { background: var(--wp); color: white; }
+    .btn-cart { background: var(--mavi); color: white; }
+    .hero-btn { width: 100%; background: var(--wp); color: white; margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 0.9rem; }
+
+    /* KATEGORİ GEZİNME */
+    .category-nav {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+        margin: 10px 0 16px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    .category-nav::-webkit-scrollbar { height: 6px; }
+    .category-nav::-webkit-scrollbar-thumb { background: rgba(44,62,80,0.12); border-radius: 999px; }
+    .category-btn {
+        background: white;
+        border: 1px solid #eee;
+        color: var(--text);
+        padding: 8px 10px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.8rem;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        white-space: nowrap;
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+    }
+    .category-btn:hover { border-color: var(--ana); }
+    .category-section { margin-bottom: 22px; }
+    .category-title { font-size: 0.95rem; margin: 12px 0 10px; padding-left: 8px; border-left: 3px solid var(--mavi); }
+
+    /* DETAY SAYFASI */
+    .page-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0 16px;
+    }
+    .back-btn {
+        background: white;
+        border: 1px solid #eee;
+        color: var(--text);
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        flex: 0 0 auto;
+    }
+    .page-title { margin: 0; font-size: 1rem; }
+    .hidden { display: none !important; }
+
+    /* MOBİL İNCE AYAR */
+    @media (max-width: 420px) {
+        .hero-card .img-box { height: 170px; }
+        .img-box { height: 110px; }
+        .category-btn { font-size: 0.78rem; padding: 7px 10px; }
+        .btn { font-size: 0.72rem; }
+    }
+
+    /* MODAL (ADET SEÇİMİ + GÜVEN METNİ) */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 12px;
+        z-index: 9999;
+    }
+    @media (min-width: 700px) {
+        .modal-overlay { align-items: center; }
+    }
+    .modal {
+        width: 100%;
+        max-width: 520px;
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        overflow: hidden;
+    }
+    .modal-header { padding: 14px 14px 0; }
+    .modal-title { margin: 0; font-size: 1.02rem; }
+    .modal-sub { margin: 6px 0 0; font-size: 0.82rem; color: #667; line-height: 1.35; }
+    .modal-body { padding: 14px; display: grid; gap: 12px; }
+    .qty-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .qty-controls { display: flex; align-items: center; gap: 8px; }
+    .qty-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        background: white;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .qty-input {
+        width: 64px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.95rem;
+        outline: none;
+    }
+    .trust-box {
+        background: #f6fbf8;
+        border: 1px solid rgba(37,211,102,0.25);
+        padding: 10px 12px;
+        border-radius: 12px;
+        color: #2c3e50;
+        font-size: 0.82rem;
+        line-height: 1.35;
+    }
+    .modal-actions { padding: 12px 14px 14px; display: grid; gap: 8px; }
+    .btn-wide { width: 100%; padding: 12px; border-radius: 10px; font-size: 0.9rem; }
+    .btn-cancel { background: #eef2f5; color: var(--text); }
+</style>
+</head>
+<body>
+
+    <header><h1>🏠 Anne Eli Lezzetleri</h1></header>
+
+    <main class="container">
+        <h2 class="section-title">🧭 Kategoriler</h2>
+        <div id="category-nav" class="category-nav"></div>
+
+        <!-- Ana sayfa -->
+        <section id="home-view">
+            <h2 class="section-title">🌟 Bugünün Menüsü</h2>
+            <div id="hero-container" class="hero-section"></div>
+
+            <h2 class="section-title">🍲 Öne Çıkanlar</h2>
+            <div id="featured-container" class="grid-section"></div>
+        </section>
+
+        <!-- Detay sayfası (kategoriye göre) -->
+        <section id="detail-view" class="hidden">
+            <div class="page-header">
+                <button id="back-btn" class="back-btn" type="button">← Ana Sayfa</button>
+                <h2 id="detail-title" class="page-title"></h2>
+            </div>
+            <div id="detail-container" class="grid-section"></div>
+        </section>
+    </main>
+
+    <script>
+        const WHATSAPP_NO = "905539534383";
+
+const SABIT_GORSEL = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e67e22'%3E%3Cpath d='M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z'/%3E%3C/svg%3E";
+
+function makeBadgeSvg(text, bgColorHex) {
+    const safeText = String(text || '').slice(0, 6);
+    const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${bgColorHex}"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" rx="28" fill="url(#g)"/>
+  <circle cx="300" cy="170" r="78" fill="rgba(255,255,255,0.75)"/>
+  <path d="M270 150h60v14h-60zM255 175h90v14h-90zM270 200h60v14h-60z" fill="rgba(44,62,80,0.85)"/>
+  <text x="300" y="330" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="44" font-weight="700" fill="rgba(44,62,80,0.9)">${safeText}</text>
+</svg>`;
+    return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+const IMG_SARMA = makeBadgeSvg('Sarma', '#B8E994');
+const IMG_MANTI = makeBadgeSvg('Manti', '#F8C291');
+const IMG_KOFTE = makeBadgeSvg('Kofte', '#82CCDD');
+const IMG_KURABIYE = makeBadgeSvg('Kur', '#F6B93B');
+const IMG_POGACA = makeBadgeSvg('Pog', '#E58E26');
+const IMG_BOREK = makeBadgeSvg('Borek', '#60A3BC');
+const IMG_KEK = makeBadgeSvg('Kek', '#CF6A87');
+const IMG_KISIR = makeBadgeSvg('Kisir', '#78E08F');
+
+const MENU_DATA = [
+    { 
+        id: 1, 
+        ad: "Günün Menüsü", 
+        fiyat: "150", 
+        ozet: "Anne eli değmiş taze lezzetler.", 
+        resim: SABIT_GORSEL, // Tırnaklar kaldırıldı, değişken bağlandı
+        kategori: "Bugünün Menüsü",
+        isGununMenusu: true 
+    },
+    { 
+        id: 2, 
+        ad: "Köfte Ekmek + Ayran", 
+        fiyat: "175", 
+        ozet: "Doyurucu ve taze malzemelerle.", 
+        resim: "foto/kofte.jpg", 
+        kategori: "Fast Food",
+        isGununMenusu: false 
+    },
+    { 
+        id: 3, 
+        ad: "Karışık Tost", 
+        fiyat: "150", 
+        ozet: "Bol malzemeli, sıcak servis.", 
+        resim: "foto/tost.jpg", 
+        kategori: "Fast Food",
+        isGununMenusu: false 
+    },
+    { 
+        id: 4, 
+        ad: "Menemen", 
+        fiyat: "150", 
+        ozet: "Ev yapımı, bol domatesli.", 
+        resim: "foto/menemen.jpg", 
+        kategori: "Kahvaltı",
+        isGununMenusu: false 
+    },
+
+    /* İstenen ürünler */
+    { id: 10, ad: "Yaprak Sarması", fiyat: "", ozet: "Ev yapımı.", resim: IMG_SARMA, kategori: "Sarmalar/Dolmalar", isGununMenusu: false },
+    { id: 11, ad: "Lahana Sarması", fiyat: "", ozet: "Ev yapımı.", resim: IMG_SARMA, kategori: "Sarmalar/Dolmalar", isGununMenusu: false },
+
+    { id: 12, ad: "Ev Yapımı Mantı", fiyat: "", ozet: "El açması lezzet.", resim: IMG_MANTI, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 13, ad: "Mercimek Köftesi", fiyat: "", ozet: "Taze ve hafif.", resim: IMG_KOFTE, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 14, ad: "Kısır", fiyat: "", ozet: "Bol yeşillikli.", resim: IMG_KISIR, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 15, ad: "İçli Köfte", fiyat: "", ozet: "Kıvamında iç harç.", resim: IMG_KOFTE, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+
+    { id: 16, ad: "Elmalı Kurabiye", fiyat: "", ozet: "Tarçınlı elma dolgulu.", resim: IMG_KURABIYE, kategori: "Kurabiyeler", isGununMenusu: false },
+    { id: 17, ad: "Tahinli Kurabiye", fiyat: "", ozet: "Ağızda dağılan.", resim: IMG_KURABIYE, kategori: "Kurabiyeler", isGununMenusu: false },
+    { id: 18, ad: "Çikolatalı Kurabiye", fiyat: "", ozet: "Bol parçacıklı.", resim: IMG_KURABIYE, kategori: "Kurabiyeler", isGununMenusu: false },
+
+    { id: 19, ad: "Peynirli Poğaça", fiyat: "", ozet: "Yumuşacık.", resim: IMG_POGACA, kategori: "Poğaça/Çörek", isGununMenusu: false },
+    { id: 20, ad: "Haşhaşlı Çörek", fiyat: "", ozet: "Mis kokulu.", resim: IMG_POGACA, kategori: "Poğaça/Çörek", isGununMenusu: false },
+
+    { id: 21, ad: "Kıymalı Tepsi Böreği", fiyat: "", ozet: "Tepside çıtır.", resim: IMG_BOREK, kategori: "Börekler", isGununMenusu: false },
+    { id: 22, ad: "Peynirli Tepsi Böreği", fiyat: "", ozet: "Peynirli lezzet.", resim: IMG_BOREK, kategori: "Börekler", isGununMenusu: false },
+
+    { id: 23, ad: "Sade Kek", fiyat: "", ozet: "Klasik ev keki.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
+    { id: 24, ad: "Kakaolu Kek", fiyat: "", ozet: "Kakaolu yumuşak doku.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
+    { id: 25, ad: "Cevizli Kek", fiyat: "", ozet: "Bol cevizli.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
+    { id: 26, ad: "Havuçlu Kek", fiyat: "", ozet: "Tarçınlı havuç.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
+    { id: 27, ad: "Limonlu Kek", fiyat: "", ozet: "Ferahlık veren aroma.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
+    { id: 28, ad: "Portakallı Kek", fiyat: "", ozet: "Portakal kabuğu aromalı.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false }
+];
+
+const OrderService = {
+    buyNow: (yemek) => {
+        OrderFlow.open(yemek);
+    }
+};
+
+const CartService = {
+    add: (yemek) => {
+        alert(`✅ ${yemek} sepete eklendi!`);
+    }
+};
+
+function slugifyTR(input) {
+    return String(input || '')
+        .trim()
+        .toLowerCase()
+        .replaceAll('ı', 'i')
+        .replaceAll('ğ', 'g')
+        .replaceAll('ü', 'u')
+        .replaceAll('ş', 's')
+        .replaceAll('ö', 'o')
+        .replaceAll('ç', 'c')
+        .replaceAll(/[^a-z0-9]+/g, '-')
+        .replaceAll(/(^-|-$)/g, '');
+}
+
+const ImageFallbackService = {
+    attach: (rootEl) => {
+        if (!rootEl) return;
+        const imgs = rootEl.querySelectorAll('img[data-fallback]');
+        imgs.forEach((img) => {
+            img.addEventListener('error', () => {
+                const fallback = img.getAttribute('data-fallback');
+                if (!fallback) return;
+                if (img.getAttribute('data-fallback-applied') === '1') return;
+                img.setAttribute('data-fallback-applied', '1');
+                img.src = fallback;
+            }, { once: true });
+        });
+    }
+};
+
+const OrderFlow = {
+    open: (yemek) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+
+        overlay.innerHTML = `
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Sipariş Adedi</h3>
+                    <p class="modal-sub"><b>${yemek}</b> için kaç adet istiyorsunuz?</p>
+                </div>
+                <div class="modal-body">
+                    <div class="qty-row">
+                        <div style="font-weight:600;">Adet</div>
+                        <div class="qty-controls">
+                            <button type="button" class="qty-btn" data-qty="dec">-</button>
+                            <input class="qty-input" inputmode="numeric" pattern="[0-9]*" value="1" data-qty="input" />
+                            <button type="button" class="qty-btn" data-qty="inc">+</button>
+                        </div>
+                    </div>
+
+                    <div class="trust-box">
+                        Siparişiniz <b>WhatsApp üzerinden</b> güvenle gönderilecektir.
+                        Linki “korkutucu” görmemek için önce burada onay alıyoruz.
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-order btn-wide" data-action="continue">WhatsApp'ta Devam Et</button>
+                    <button type="button" class="btn btn-cancel btn-wide" data-action="cancel">Vazgeç</button>
+                </div>
+            </div>
+        `;
+
+        const close = () => {
+            overlay.remove();
+            document.body.style.overflow = '';
+        };
+
+        const clampQty = (n) => {
+            if (!Number.isFinite(n)) return 1;
+            return Math.max(1, Math.min(99, Math.floor(n)));
+        };
+
+        const getQty = () => {
+            const input = overlay.querySelector('[data-qty="input"]');
+            const n = Number(input?.value);
+            return clampQty(n);
+        };
+
+        const setQty = (n) => {
+            const input = overlay.querySelector('[data-qty="input"]');
+            if (!input) return;
+            input.value = String(clampQty(n));
+        };
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) close();
+
+            const qtyAction = e.target?.getAttribute?.('data-qty');
+            if (qtyAction === 'inc') setQty(getQty() + 1);
+            if (qtyAction === 'dec') setQty(getQty() - 1);
+
+            const action = e.target?.getAttribute?.('data-action');
+            if (action === 'cancel') close();
+            if (action === 'continue') {
+                const adet = getQty();
+                const msg = encodeURIComponent(`Merhaba, *${yemek}* için *${adet} adet* sipariş vermek istiyorum.`);
+                const url = `https://wa.me/${WHATSAPP_NO}?text=${msg}`;
+
+                // Güven: yeni sekmede aç, bu sayfa yerinde kalsın
+                window.open(url, '_blank', 'noopener,noreferrer');
+                close();
+            }
+        });
+
+        overlay.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') close();
+        });
+
+        document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden';
+
+        const input = overlay.querySelector('[data-qty="input"]');
+        if (input) {
+            input.addEventListener('input', () => setQty(Number(input.value)));
+            input.focus();
+            input.select?.();
+        }
+    }
+};
+
+function getCategories() {
+    const otherItems = MENU_DATA.filter(x => !x.isGununMenusu);
+    const grouped = otherItems.reduce((acc, item) => {
+        const key = item.kategori || "Diğer";
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(item);
+        return acc;
+    }, {});
+    return Object.keys(grouped).map((name) => ({ name, items: grouped[name] }));
+}
+
+function renderCard(item) {
+    const resimYolu = item.resim || SABIT_GORSEL;
+    const fiyatText = (item.fiyat && String(item.fiyat).trim() !== "") ? `${item.fiyat} TL` : "Fiyat Sor";
+
+    return `
+        <div class="${item.isGununMenusu ? 'hero-card' : 'card'}">
+            <div class="img-box">
+                <img src="${resimYolu}" alt="${item.ad}" data-fallback="${SABIT_GORSEL}">
+                <div class="price">${fiyatText}</div>
+            </div>
+            <div class="info">
+                ${item.isGununMenusu ? `<h2>${item.ad}</h2>` : `<h3>${item.ad}</h3>`}
+                <p>${item.ozet || ''}</p>
+                ${item.isGununMenusu ?
+                    `<button class="btn hero-btn" onclick="OrderService.buyNow('${item.ad}')">WhatsApp'tan Sipariş Ver</button>` :
+                    `<div class="btn-group">
+                        <button class="btn btn-cart" onclick="CartService.add('${item.ad}')">Sepete Ekle</button>
+                        <button class="btn btn-order" onclick="OrderService.buyNow('${item.ad}')">Sipariş</button>
+                    </div>`
+                }
+            </div>
+        </div>
+    `;
+}
+
+function getSelectedFeaturedItems() {
+    const featuredIds = new Set([2, 3]); // Köfte + Tost ana sayfada görünsün
+    return MENU_DATA.filter((x) => featuredIds.has(x.id));
+}
+
+function navigateToHome() {
+    window.location.hash = '';
+}
+
+function navigateToCategory(categoryName) {
+    const encoded = encodeURIComponent(categoryName);
+    window.location.hash = `kategori=${encoded}`;
+}
+
+function getRouteFromHash() {
+    const raw = String(window.location.hash || '').replace(/^#/, '');
+    if (!raw) return { type: 'home' };
+
+    const m = raw.match(/^kategori=(.+)$/);
+    if (!m) return { type: 'home' };
+
+    try {
+        const name = decodeURIComponent(m[1]);
+        return { type: 'category', name };
+    } catch {
+        return { type: 'home' };
+    }
+}
+
+function renderCategoryNav() {
+    const categoryNav = document.getElementById('category-nav');
+    if (!categoryNav) return;
+
+    const categories = getCategories();
+    categoryNav.innerHTML = categories.map(({ name }) => {
+        return `<button class="category-btn" type="button" onclick="navigateToCategory('${name.replaceAll("'", "\\'")}')">${name}</button>`;
+    }).join('');
+}
+
+function renderHomeView() {
+    const homeView = document.getElementById('home-view');
+    const detailView = document.getElementById('detail-view');
+    const heroCont = document.getElementById('hero-container');
+    const featuredCont = document.getElementById('featured-container');
+
+    if (!homeView || !detailView || !heroCont || !featuredCont) return;
+
+    homeView.classList.remove('hidden');
+    detailView.classList.add('hidden');
+
+    const heroItem = MENU_DATA.find(x => x.isGununMenusu);
+    heroCont.innerHTML = heroItem ? renderCard(heroItem) : "";
+
+    const featuredItems = getSelectedFeaturedItems();
+    featuredCont.innerHTML = featuredItems.map(renderCard).join('');
+
+    ImageFallbackService.attach(homeView);
+}
+
+function renderCategoryDetailView(categoryName) {
+    const homeView = document.getElementById('home-view');
+    const detailView = document.getElementById('detail-view');
+    const detailTitle = document.getElementById('detail-title');
+    const detailCont = document.getElementById('detail-container');
+
+    if (!homeView || !detailView || !detailTitle || !detailCont) return;
+
+    homeView.classList.add('hidden');
+    detailView.classList.remove('hidden');
+
+    const categories = getCategories();
+    const match = categories.find(x => x.name === categoryName);
+
+    detailTitle.textContent = match ? match.name : categoryName;
+    detailCont.innerHTML = match ? match.items.map(renderCard).join('') : "";
+
+    ImageFallbackService.attach(detailView);
+}
+
+function renderApp() {
+    renderCategoryNav();
+
+    const route = getRouteFromHash();
+    if (route.type === 'home') {
+        renderHomeView();
+        return;
+    }
+
+    if (route.type === 'category') {
+        renderCategoryDetailView(route.name);
+        return;
+    }
+
+    renderHomeView();
+}
+
+// Global: inline onclick kullanımı için gerekli
+window.navigateToCategory = navigateToCategory;
+window.navigateToHome = navigateToHome;
+window.OrderFlow = OrderFlow;
+
+// Uygulamayı başlat
+document.addEventListener('DOMContentLoaded', () => {
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) backBtn.addEventListener('click', navigateToHome);
+
+    renderApp();
+    window.addEventListener('hashchange', renderApp);
+});
+    </script>
+</body>
+</html>
