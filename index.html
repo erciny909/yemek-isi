@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lezzet Durağı | Menü</title>
+    <title>Ceren Ev Yemekleri | Menü</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <title>Anne Eli Lezzetleri - Günlük Menü</title>
 
@@ -16,10 +16,48 @@
     :root { --ana: #e67e22; --wp: #25D366; --bg: #f8f9fa; --mavi: #3498db; --text: #2c3e50; }
     
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; color: var(--text); padding-bottom: 20px; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background:
+            radial-gradient(900px 300px at 10% 0%, rgba(230,126,34,0.12), transparent 60%),
+            radial-gradient(900px 300px at 90% 0%, rgba(52,152,219,0.10), transparent 55%),
+            var(--bg);
+        margin: 0;
+        color: var(--text);
+        padding-bottom: 20px;
+    }
     
-    header { background: white; padding: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    h1 { margin: 0; font-size: 1.1rem; color: var(--ana); }
+    header { background: white; padding: 12px 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    h1 { margin: 0; font-size: 1.05rem; color: var(--ana); }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .cart-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: white;
+        border: 1px solid #eee;
+        color: var(--text);
+        padding: 8px 10px;
+        border-radius: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        white-space: nowrap;
+    }
+    .cart-badge {
+        min-width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: var(--mavi);
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        padding: 0 6px;
+    }
 
     .container { width: 100%; padding: 10px; }
     .section-title { font-size: 1rem; margin: 15px 0 10px; padding-left: 8px; border-left: 3px solid var(--ana); }
@@ -78,16 +116,10 @@
     /* KATEGORİ GEZİNME */
     .category-nav {
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         gap: 8px;
         margin: 10px 0 16px;
-        overflow-x: auto;
-        padding-bottom: 6px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
     }
-    .category-nav::-webkit-scrollbar { height: 6px; }
-    .category-nav::-webkit-scrollbar-thumb { background: rgba(44,62,80,0.12); border-radius: 999px; }
     .category-btn {
         background: white;
         border: 1px solid #eee;
@@ -99,8 +131,8 @@
         cursor: pointer;
         box-shadow: 0 2px 5px rgba(0,0,0,0.04);
         white-space: nowrap;
-        flex: 0 0 auto;
-        scroll-snap-align: start;
+        flex: 1 1 calc(50% - 8px);
+        text-align: center;
     }
     .category-btn:hover { border-color: var(--ana); }
     .category-section { margin-bottom: 22px; }
@@ -133,6 +165,8 @@
         .img-box { height: 110px; }
         .category-btn { font-size: 0.78rem; padding: 7px 10px; }
         .btn { font-size: 0.72rem; }
+        h1 { font-size: 1rem; }
+        .cart-btn { padding: 7px 9px; }
     }
 
     /* MODAL (ADET SEÇİMİ + GÜVEN METNİ) */
@@ -198,7 +232,16 @@
 </head>
 <body>
 
-    <header><h1>🏠 Anne Eli Lezzetleri</h1></header>
+    <header>
+        <div class="header-inner">
+            <h1>🏠 Anne Eli Lezzetleri</h1>
+            <div class="header-actions">
+                <button id="cart-open-btn" class="cart-btn" type="button">
+                    🛒 Sepet <span id="cart-badge" class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
     <main class="container">
         <h2 class="section-title">🧭 Kategoriler</h2>
@@ -261,7 +304,7 @@ const MENU_DATA = [
         ad: "Günün Menüsü", 
         fiyat: "150", 
         ozet: "Anne eli değmiş taze lezzetler.", 
-        resim: SABIT_GORSEL, // Tırnaklar kaldırıldı, değişken bağlandı
+        resim: "foto/menü.jpg.png", // Tırnaklar kaldırıldı, değişken bağlandı
         kategori: "Bugünün Menüsü",
         isGununMenusu: true 
     },
@@ -270,7 +313,7 @@ const MENU_DATA = [
         ad: "Köfte Ekmek + Ayran", 
         fiyat: "175", 
         ozet: "Doyurucu ve taze malzemelerle.", 
-        resim: "foto/kofte.jpg", 
+        resim: "foto/köfte.jpg.png", 
         kategori: "Fast Food",
         isGununMenusu: false 
     },
@@ -279,7 +322,7 @@ const MENU_DATA = [
         ad: "Karışık Tost", 
         fiyat: "150", 
         ozet: "Bol malzemeli, sıcak servis.", 
-        resim: "foto/tost.jpg", 
+        resim: "foto/tost.jpg.png", 
         kategori: "Fast Food",
         isGununMenusu: false 
     },
@@ -288,36 +331,36 @@ const MENU_DATA = [
         ad: "Menemen", 
         fiyat: "150", 
         ozet: "Ev yapımı, bol domatesli.", 
-        resim: "foto/menemen.jpg", 
+        resim: "foto/menemen.jpg.png", 
         kategori: "Kahvaltı",
         isGununMenusu: false 
     },
 
     /* İstenen ürünler */
-    { id: 10, ad: "Yaprak Sarması", fiyat: "", ozet: "Ev yapımı.", resim: IMG_SARMA, kategori: "Sarmalar/Dolmalar", isGununMenusu: false },
-    { id: 11, ad: "Lahana Sarması", fiyat: "", ozet: "Ev yapımı.", resim: IMG_SARMA, kategori: "Sarmalar/Dolmalar", isGununMenusu: false },
+    { id: 10, ad: "Yaprak Sarması", fiyat: "", ozet: "Ev yapımı.", resim: "foto/yaprak.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false },
+    { id: 11, ad: "Lahana Sarması", fiyat: "", ozet: "Ev yapımı.", resim: "foto/lahana.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false },
 
-    { id: 12, ad: "Ev Yapımı Mantı", fiyat: "", ozet: "El açması lezzet.", resim: IMG_MANTI, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
-    { id: 13, ad: "Mercimek Köftesi", fiyat: "", ozet: "Taze ve hafif.", resim: IMG_KOFTE, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
-    { id: 14, ad: "Kısır", fiyat: "", ozet: "Bol yeşillikli.", resim: IMG_KISIR, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
-    { id: 15, ad: "İçli Köfte", fiyat: "", ozet: "Kıvamında iç harç.", resim: IMG_KOFTE, kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 12, ad: "Ev Yapımı Mantı", fiyat: "", ozet: "El açması lezzet.", resim: "foto/mantı.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 13, ad: "Mercimek Köftesi", fiyat: "", ozet: "Taze ve hafif.", resim: "foto/mercimek.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 14, ad: "Kısır", fiyat: "", ozet: "Bol yeşillikli.", resim: "foto/kısır.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false },
+    { id: 15, ad: "İçli Köfte", fiyat: "", ozet: "Kıvamında iç harç.", resim: "foto/içli.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false },
 
-    { id: 16, ad: "Elmalı Kurabiye", fiyat: "", ozet: "Tarçınlı elma dolgulu.", resim: IMG_KURABIYE, kategori: "Kurabiyeler", isGununMenusu: false },
-    { id: 17, ad: "Tahinli Kurabiye", fiyat: "", ozet: "Ağızda dağılan.", resim: IMG_KURABIYE, kategori: "Kurabiyeler", isGununMenusu: false },
-    { id: 18, ad: "Çikolatalı Kurabiye", fiyat: "", ozet: "Bol parçacıklı.", resim: IMG_KURABIYE, kategori: "Kurabiyeler", isGununMenusu: false },
+    { id: 16, ad: "Elmalı Kurabiye", fiyat: "", ozet: "Tarçınlı elma dolgulu.", resim: "foto/elmalı.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false },
+    { id: 17, ad: "Tahinli Kurabiye", fiyat: "", ozet: "Ağızda dağılan.", resim: "foto/tahinli.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false },
+    { id: 18, ad: "Çikolatalı Kurabiye", fiyat: "", ozet: "Bol parçacıklı.", resim: "foto/çikolatalı.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false },
 
-    { id: 19, ad: "Peynirli Poğaça", fiyat: "", ozet: "Yumuşacık.", resim: IMG_POGACA, kategori: "Poğaça/Çörek", isGununMenusu: false },
-    { id: 20, ad: "Haşhaşlı Çörek", fiyat: "", ozet: "Mis kokulu.", resim: IMG_POGACA, kategori: "Poğaça/Çörek", isGununMenusu: false },
+    { id: 19, ad: "Peynirli Poğaça", fiyat: "", ozet: "Yumuşacık.", resim: "foto/peynirli.jpg.png", kategori: "Poğaça/Çörek", isGununMenusu: false },
+    { id: 20, ad: "Haşhaşlı Çörek", fiyat: "", ozet: "Mis kokulu.", resim: "foto/haşhaşlı.jpg.png", kategori: "Poğaça/Çörek", isGununMenusu: false },
 
-    { id: 21, ad: "Kıymalı Tepsi Böreği", fiyat: "", ozet: "Tepside çıtır.", resim: IMG_BOREK, kategori: "Börekler", isGununMenusu: false },
-    { id: 22, ad: "Peynirli Tepsi Böreği", fiyat: "", ozet: "Peynirli lezzet.", resim: IMG_BOREK, kategori: "Börekler", isGununMenusu: false },
+    { id: 21, ad: "Kıymalı Tepsi Böreği", fiyat: "", ozet: "Tepside çıtır.", resim: "foto/kıymalı.jpg.png", kategori: "Börekler", isGununMenusu: false },
+    { id: 22, ad: "Peynirli Tepsi Böreği", fiyat: "", ozet: "Peynirli lezzet.", resim: "foto/peynirli.jpg.png", kategori: "Börekler", isGununMenusu: false },
 
-    { id: 23, ad: "Sade Kek", fiyat: "", ozet: "Klasik ev keki.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
-    { id: 24, ad: "Kakaolu Kek", fiyat: "", ozet: "Kakaolu yumuşak doku.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
-    { id: 25, ad: "Cevizli Kek", fiyat: "", ozet: "Bol cevizli.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
-    { id: 26, ad: "Havuçlu Kek", fiyat: "", ozet: "Tarçınlı havuç.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
-    { id: 27, ad: "Limonlu Kek", fiyat: "", ozet: "Ferahlık veren aroma.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false },
-    { id: 28, ad: "Portakallı Kek", fiyat: "", ozet: "Portakal kabuğu aromalı.", resim: IMG_KEK, kategori: "Kekler", isGununMenusu: false }
+    { id: 23, ad: "Sade Kek", fiyat: "", ozet: "Klasik ev keki.", resim: "foto/sade.jpg.png", kategori: "Kekler", isGununMenusu: false },
+    { id: 24, ad: "Kakaolu Kek", fiyat: "", ozet: "Kakaolu yumuşak doku.", resim: "foto/kakolu.jpg.png", kategori: "Kekler", isGununMenusu: false },
+    { id: 25, ad: "Cevizli Kek", fiyat: "", ozet: "Bol cevizli.", resim: "foto/cevizli.jpg.png", kategori: "Kekler", isGununMenusu: false },
+    { id: 26, ad: "Havuçlu Kek", fiyat: "", ozet: "Tarçınlı havuç.", resim: "foto/havuçlu.jpg.png", kategori: "Kekler", isGununMenusu: false },
+    { id: 27, ad: "Limonlu Kek", fiyat: "", ozet: "Ferahlık veren aroma.", resim: "foto/limonlu.jpg.png", kategori: "Kekler", isGununMenusu: false },
+    { id: 28, ad: "Portakallı Kek", fiyat: "", ozet: "Portakal kabuğu aromalı.", resim: "foto/portakallı.jpg.png", kategori: "Kekler", isGununMenusu: false }
 ];
 
 const OrderService = {
@@ -326,9 +369,175 @@ const OrderService = {
     }
 };
 
-const CartService = {
-    add: (yemek) => {
-        alert(`✅ ${yemek} sepete eklendi!`);
+const CartService = (() => {
+    const items = new Map(); // id -> qty
+
+    const clampQty = (n) => {
+        if (!Number.isFinite(n)) return 1;
+        return Math.max(1, Math.min(99, Math.floor(n)));
+    };
+
+    const getItemById = (id) => MENU_DATA.find((x) => x.id === id);
+
+    const getTotalCount = () => {
+        let total = 0;
+        for (const qty of items.values()) total += qty;
+        return total;
+    };
+
+    const updateBadge = () => {
+        const badge = document.getElementById('cart-badge');
+        if (badge) badge.textContent = String(getTotalCount());
+    };
+
+    const add = (id) => {
+        const n = Number(id);
+        if (!Number.isFinite(n)) return;
+        const current = items.get(n) || 0;
+        items.set(n, clampQty(current + 1));
+        updateBadge();
+    };
+
+    const setQty = (id, qty) => {
+        const n = Number(id);
+        if (!Number.isFinite(n)) return;
+        const q = clampQty(Number(qty));
+        items.set(n, q);
+        updateBadge();
+    };
+
+    const remove = (id) => {
+        const n = Number(id);
+        if (!Number.isFinite(n)) return;
+        items.delete(n);
+        updateBadge();
+    };
+
+    const clear = () => {
+        items.clear();
+        updateBadge();
+    };
+
+    const getLines = () => {
+        const lines = [];
+        for (const [id, qty] of items.entries()) {
+            const item = getItemById(id);
+            if (!item) continue;
+            lines.push({ id, qty, ad: item.ad });
+        }
+        return lines;
+    };
+
+    const buildWhatsAppMessage = () => {
+        const lines = getLines();
+        if (lines.length === 0) return 'Merhaba, sepetim boş görünüyor.';
+        const body = lines.map((l) => `- ${l.ad} x ${l.qty}`).join('\n');
+        return `Merhaba, aşağıdaki ürünlerden sipariş vermek istiyorum:\n${body}`;
+    };
+
+    return { add, setQty, remove, clear, getLines, buildWhatsAppMessage, updateBadge };
+})();
+
+const CartFlow = {
+    open: () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+
+        const render = () => {
+            const lines = CartService.getLines();
+            const listHtml = lines.length === 0
+                ? `<div style="padding:10px 0;color:#667;font-size:0.9rem;">Sepetiniz boş.</div>`
+                : `
+                    <div style="display:grid;gap:10px;">
+                        ${lines.map((l) => `
+                            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                                <div style="font-weight:700; font-size:0.9rem; flex:1;">${l.ad}</div>
+                                <div class="qty-controls">
+                                    <button type="button" class="qty-btn" data-cart="dec" data-id="${l.id}">-</button>
+                                    <input class="qty-input" inputmode="numeric" pattern="[0-9]*" value="${l.qty}" data-cart="input" data-id="${l.id}" />
+                                    <button type="button" class="qty-btn" data-cart="inc" data-id="${l.id}">+</button>
+                                </div>
+                                <button type="button" class="qty-btn" title="Sil" data-cart="remove" data-id="${l.id}">✕</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+            overlay.innerHTML = `
+                <div class="modal">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Sepet</h3>
+                        <p class="modal-sub">Birden fazla ürün seçip tek seferde WhatsApp’tan sipariş verebilirsiniz.</p>
+                    </div>
+                    <div class="modal-body">
+                        ${listHtml}
+                        <div class="trust-box">
+                            Siparişiniz <b>WhatsApp</b> üzerinden gönderilir. Bu ekran sadece sepetinizi düzenlemek içindir.
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-order btn-wide" data-action="checkout" ${lines.length === 0 ? 'disabled style="opacity:.6;cursor:not-allowed;"' : ''}>Sepeti WhatsApp’tan Sipariş Et</button>
+                        <button type="button" class="btn btn-cancel btn-wide" data-action="clear" ${lines.length === 0 ? 'disabled style="opacity:.6;cursor:not-allowed;"' : ''}>Sepeti Temizle</button>
+                        <button type="button" class="btn btn-cancel btn-wide" data-action="close">Kapat</button>
+                    </div>
+                </div>
+            `;
+        };
+
+        const close = () => {
+            overlay.remove();
+            document.body.style.overflow = '';
+        };
+
+        const clampQty = (n) => {
+            if (!Number.isFinite(n)) return 1;
+            return Math.max(1, Math.min(99, Math.floor(n)));
+        };
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) close();
+
+            const action = e.target?.getAttribute?.('data-action');
+            if (action === 'close') close();
+            if (action === 'clear') { CartService.clear(); render(); }
+            if (action === 'checkout') {
+                const msg = encodeURIComponent(CartService.buildWhatsAppMessage());
+                const url = `https://wa.me/${WHATSAPP_NO}?text=${msg}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                close();
+            }
+
+            const cartAction = e.target?.getAttribute?.('data-cart');
+            const id = e.target?.getAttribute?.('data-id');
+            if (!cartAction || !id) return;
+
+            const lines = CartService.getLines();
+            const line = lines.find((l) => String(l.id) === String(id));
+            const current = line ? Number(line.qty) : 1;
+
+            if (cartAction === 'inc') { CartService.setQty(id, clampQty(current + 1)); render(); }
+            if (cartAction === 'dec') { CartService.setQty(id, clampQty(current - 1)); render(); }
+            if (cartAction === 'remove') { CartService.remove(id); render(); }
+        });
+
+        overlay.addEventListener('input', (e) => {
+            const target = e.target;
+            const cartInput = target?.getAttribute?.('data-cart');
+            if (cartInput !== 'input') return;
+            const id = target.getAttribute('data-id');
+            const val = clampQty(Number(target.value));
+            CartService.setQty(id, val);
+        });
+
+        overlay.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') close();
+        });
+
+        document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden';
+        render();
     }
 };
 
@@ -482,7 +691,7 @@ function renderCard(item) {
                 ${item.isGununMenusu ?
                     `<button class="btn hero-btn" onclick="OrderService.buyNow('${item.ad}')"> Sipariş Ver</button>` :
                     `<div class="btn-group">
-                        <button class="btn btn-cart" onclick="CartService.add('${item.ad}')">Sepete Ekle</button>
+                        <button class="btn btn-cart" onclick="CartService.add(${item.id})">Sepete Ekle</button>
                         <button class="btn btn-order" onclick="OrderService.buyNow('${item.ad}')">Sipariş</button>
                     </div>`
                 }
@@ -591,13 +800,18 @@ function renderApp() {
 window.navigateToCategory = navigateToCategory;
 window.navigateToHome = navigateToHome;
 window.OrderFlow = OrderFlow;
+window.CartFlow = CartFlow;
 
 // Uygulamayı başlat
 document.addEventListener('DOMContentLoaded', () => {
     const backBtn = document.getElementById('back-btn');
     if (backBtn) backBtn.addEventListener('click', navigateToHome);
 
+    const cartBtn = document.getElementById('cart-open-btn');
+    if (cartBtn) cartBtn.addEventListener('click', () => CartFlow.open());
+
     renderApp();
+    CartService.updateBadge();
     window.addEventListener('hashchange', renderApp);
 });
     </script>
