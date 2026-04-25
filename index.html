@@ -461,6 +461,7 @@ const MENU_DATA = [
         ozet: "Anne eli değmiş taze lezzetler.", 
         resim: "foto/menü2.jpg", // Tırnaklar kaldırıldı, değişken bağlandı
         kategori: "Bugünün Menüsü",
+        birim: "Adet",
         isGununMenusu: true 
     },
     { 
@@ -470,7 +471,8 @@ const MENU_DATA = [
         ozet: "Doyurucu ve taze malzemelerle.", 
         resim: "foto/köfte.jpg.png", 
         kategori: "Fast Food",
-        isGununMenusu: false 
+        isGununMenusu: false ,
+        birim: "Adet"
     },
     { 
         id: 3, 
@@ -479,7 +481,8 @@ const MENU_DATA = [
         ozet: "Bol malzemeli, sıcak servis.", 
         resim: "foto/tost.jpg.png", 
         kategori: "Fast Food",
-        isGununMenusu: false 
+        isGununMenusu: false ,
+        birim: "Adet"
     },
     { 
         id: 4, 
@@ -488,6 +491,7 @@ const MENU_DATA = [
         ozet: "Ev yapımı, bol domatesli.", 
         resim: "foto/menemen.jpg.png", 
         kategori: "Kahvaltı",
+        birim: "Adet",
         isGununMenusu: false 
     },
 
@@ -495,27 +499,27 @@ const MENU_DATA = [
     { id: 10, ad: "Yaprak Sarması", fiyat: "600", ozet: "KİLO İLE SATILIR.!", resim: "foto/yaprak.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false , onSiparis: true},
     { id: 11, ad: "Lahana Sarması", fiyat: "500", ozet: "KİLO İLE SATILIR.!", resim: "foto/lahana.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false , onSiparis: true},
 
-    { id: 12, ad: "Ev Yapımı Mantı", fiyat: "500", ozet: "KİLO İLE SATILIR!", resim: "foto/mantı.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false , onSiparis: true},
-    { id: 13, ad: "Mercimek Köftesi", fiyat: "300", ozet: "KİLO İLE SATILIR!", resim: "foto/mercimek.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false , onSiparis: true},
-    { id: 14, ad: "Kısır", fiyat: "250", ozet: "Bol yeşillikli KİLO İLE SATILIR!.", resim: "foto/kısır.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false , onSiparis: true},
-    { id: 15, ad: "İçli Köfte", fiyat: "50", ozet: "Kıvamında iç harç KİLO İLE SATILIR!.", resim: "foto/içli.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false , onSiparis: true},
+    { id: 12, ad: "Ev Yapımı Mantı", fiyat: "500", ozet: "KİLO İLE SATILIR!", resim: "foto/mantı.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false , onSiparis: true,birim: "Adet / KG"},
+    { id: 13, ad: "Mercimek Köftesi", fiyat: "300", ozet: "KİLO İLE SATILIR!", resim: "foto/mercimek.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 14, ad: "Kısır", fiyat: "250", ozet: "Bol yeşillikli KİLO İLE SATILIR!.", resim: "foto/kısır.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 15, ad: "İçli Köfte", fiyat: "50", ozet: "Kıvamında iç harç KİLO İLE SATILIR!.", resim: "foto/içli.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
 
-    { id: 16, ad: "Elmalı Kurabiye", fiyat: "300", ozet: "Tarçınlı elma dolgulu KİLO İLE SATILIR!.", resim: "foto/elmalı.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false , onSiparis: true},
-    { id: 17, ad: "Tahinli Kurabiye", fiyat: "350", ozet: "Ağızda dağılan KİLO İLE SATILIR!.", resim: "foto/tahinli.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false , onSiparis: true},
-    { id: 18, ad: "Çikolatalı Kurabiye", fiyat: "300", ozet: "Bol parçacıklı KİLO İLE SATILIR!.", resim: "foto/çikolatalı.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false , onSiparis: true},
+    { id: 16, ad: "Elmalı Kurabiye", fiyat: "300", ozet: "Tarçınlı elma dolgulu KİLO İLE SATILIR!.", resim: "foto/elmalı.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 17, ad: "Tahinli Kurabiye", fiyat: "350", ozet: "Ağızda dağılan KİLO İLE SATILIR!.", resim: "foto/tahinli.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 18, ad: "Çikolatalı Kurabiye", fiyat: "300", ozet: "Bol parçacıklı KİLO İLE SATILIR!.", resim: "foto/çikolatalı.jpg.png", kategori: "Kurabiyeler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
 
-    { id: 19, ad: "Peynirli Poğaça", fiyat: "300", ozet: "Yumuşacık KİLO İLE SATILIR!.", resim: "foto/peynirli.jpg.png", kategori: "Poğaça/Çörek", isGununMenusu: false , onSiparis: true},
-    { id: 20, ad: "Haşhaşlı Çörek", fiyat: "350", ozet: "Mis kokulu KİLO İLE SATILIR!.", resim: "foto/haşhaşlı.jpg.png", kategori: "Poğaça/Çörek", isGununMenusu: false , onSiparis: true},
+    { id: 19, ad: "Peynirli Poğaça", fiyat: "300", ozet: "Yumuşacık KİLO İLE SATILIR!.", resim: "foto/peynirli.jpg.png", kategori: "Poğaça/Çörek", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 20, ad: "Haşhaşlı Çörek", fiyat: "350", ozet: "Mis kokulu KİLO İLE SATILIR!.", resim: "foto/haşhaşlı.jpg.png", kategori: "Poğaça/Çörek", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
 
-    { id: 21, ad: "Kıymalı Tepsi Böreği", fiyat: "1000", ozet: "Tepside çıtır KİLO İLE SATILIR!.", resim: "foto/kıymalı.jpg.png", kategori: "Börekler", isGununMenusu: false , onSiparis: true},
-    { id: 22, ad: "Peynirli Tepsi Böreği", fiyat: "850", ozet: "Peynirli lezzet KİLO İLE SATILIR!.", resim: "foto/tepsi.jpg.png", kategori: "Börekler", isGununMenusu: false , onSiparis: true},
+    { id: 21, ad: "Kıymalı Tepsi Böreği", fiyat: "1000", ozet: "Tepside çıtır KİLO İLE SATILIR!.", resim: "foto/kıymalı.jpg.png", kategori: "Börekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 22, ad: "Peynirli Tepsi Böreği", fiyat: "850", ozet: "Peynirli lezzet KİLO İLE SATILIR!.", resim: "foto/tepsi.jpg.png", kategori: "Börekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
 
-    { id: 23, ad: "Sade Kek", fiyat: "200", ozet: "Klasik ev keki KİLO İLE SATILIR!.", resim: "foto/sade.jpg.png", kategori: "Kekler", isGununMenusu: false , onSiparis: true},
-    { id: 24, ad: "Kakaolu Kek", fiyat: "230", ozet: "Kakaolu yumuşak doku KİLO İLE SATILIR!.", resim: "foto/kakolu.jpg.png", kategori: "Kekler", isGununMenusu: false , onSiparis: true},
-    { id: 25, ad: "Cevizli Kek", fiyat: "280", ozet: "Bol cevizli KİLO İLE SATILIR!.", resim: "foto/cevizli.jpg.png", kategori: "Kekler", isGununMenusu: false , onSiparis: true},
-    { id: 26, ad: "Havuçlu Kek", fiyat: "260", ozet: "Tarçınlı havuç KİLO İLE SATILIR!.", resim: "foto/havuçlu.jpg.png", kategori: "Kekler", isGununMenusu: false , onSiparis: true},
-    { id: 27, ad: "Limonlu Kek", fiyat: "260", ozet: "Ferahlık veren aroma KİLO İLE SATILIR!.", resim: "foto/limonlu.jpg.png", kategori: "Kekler", isGununMenusu: false , onSiparis: true},
-    { id: 28, ad: "Portakallı Kek", fiyat: "260", ozet: "Portakal kabuğu aromalı KİLO İLE SATILIR!.", resim: "foto/portakallı.jpg.png", kategori: "Kekler", isGununMenusu: false , onSiparis: true}
+    { id: 23, ad: "Sade Kek", fiyat: "200", ozet: "Klasik ev keki KİLO İLE SATILIR!.", resim: "foto/sade.jpg.png", kategori: "Kekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 24, ad: "Kakaolu Kek", fiyat: "230", ozet: "Kakaolu yumuşak doku KİLO İLE SATILIR!.", resim: "foto/kakolu.jpg.png", kategori: "Kekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 25, ad: "Cevizli Kek", fiyat: "280", ozet: "Bol cevizli KİLO İLE SATILIR!.", resim: "foto/cevizli.jpg.png", kategori: "Kekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 26, ad: "Havuçlu Kek", fiyat: "260", ozet: "Tarçınlı havuç KİLO İLE SATILIR!.", resim: "foto/havuçlu.jpg.png", kategori: "Kekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 27, ad: "Limonlu Kek", fiyat: "260", ozet: "Ferahlık veren aroma KİLO İLE SATILIR!.", resim: "foto/limonlu.jpg.png", kategori: "Kekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 28, ad: "Portakallı Kek", fiyat: "260", ozet: "Portakal kabuğu aromalı KİLO İLE SATILIR!.", resim: "foto/portakallı.jpg.png", kategori: "Kekler", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true}
 ];
 
 const OrderService = {
@@ -778,28 +782,33 @@ const ImageFallbackService = {
 };
 const OrderFlow = {
     open: function(yemekObj) {
-        // yemekObj: { id, ad, onSiparis, ... } şeklinde gelmeli
         const overlay = document.createElement('div');
         overlay.className = 'modal-overlay';
 
-        // Ön sipariş uyarısı kontrolü
+        // 1. Birim Kontrolü
+        const gosterilecekBirim = yemekObj.birim || "Adet";
+
+        // 2. Ön Sipariş Uyarı Kontrolü
         const uyariHtml = yemekObj.onSiparis 
-            ? `<div class="preorder-notice">⚠️ Kilo ile satılan ürünlerimizde hazırlık süresi mevcuttur. Sipariş vermeden önce lütfen teslimat saati için iletişime geçin. .</div>` 
+            ? `<div class="preorder-notice">
+                <strong>Tazelik Notu:</strong> Bu ürün size özel hazırlanmaktadır. 
+                Hazırlık süreci ve teslimat saati teyidi için lütfen bizimle iletişime geçiniz.
+               </div>` 
             : "";
 
         overlay.innerHTML = `
             <div class="modal">
                 <div class="modal-header">
-                    <h3 class="modal-title">Sipariş Adedi</h3>
+                    <h3 class="modal-title">Sipariş Miktarı</h3>
                     <p class="modal-sub"><b>${yemekObj.ad}</b></p>
                     ${uyariHtml}
                 </div>
                 <div class="modal-body">
                     <div class="qty-row">
-                        <div style="font-weight:600;">Adet / KG</div>
+                        <div style="font-weight:600;">${gosterilecekBirim}</div> 
                         <div class="qty-controls">
                             <button type="button" class="qty-btn" data-qty="dec">-</button>
-                            <input class="qty-input" id="order-qty-input" inputmode="numeric" pattern="[0-9]*" value="1" />
+                            <input class="qty-input" id="order-qty-input" value="1" inputmode="numeric" />
                             <button type="button" class="qty-btn" data-qty="inc">+</button>
                         </div>
                     </div>
@@ -825,6 +834,7 @@ const OrderFlow = {
             return n;
         };
 
+        // TEK BİR EVENT LISTENER BLOĞU
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) close();
 
@@ -838,9 +848,12 @@ const OrderFlow = {
             if (action === 'cancel') close();
             if (action === 'continue') {
                 const finalAdet = validateValue(input.value);
-                // WhatsApp mesajına ön sipariş notu ekle
                 const onSiparisNotu = yemekObj.onSiparis ? " (Ön Sipariş)" : "";
-                const msg = encodeURIComponent(`Merhaba, *${yemekObj.ad}* ürününden *${finalAdet} adet/kg* sipariş vermek istiyorum.${onSiparisNotu}`);
+                
+                const msg = encodeURIComponent(
+                    `Merhaba, *${yemekObj.ad}* ürününden *${finalAdet} ${gosterilecekBirim}* sipariş vermek istiyorum.${onSiparisNotu} Müsaitlik durumunu öğrenebilir miyim?`
+                );
+                
                 const url = `https://wa.me/${WHATSAPP_NO}?text=${msg}`;
                 window.open(url, '_blank', 'noopener,noreferrer');
                 close();
@@ -860,18 +873,18 @@ const OrderFlow = {
 
         if (input) {
             input.focus();
-            input.select(); 
-
+            input.select();
             input.addEventListener('input', (e) => {
                 e.target.value = e.target.value.replace(/[^0-9]/g, '');
             });
-
             input.addEventListener('blur', (e) => {
                 if (!e.target.value || e.target.value === "0") e.target.value = "1";
             });
         }
-    }
-};
+    } // open bitişi
+}; // OrderFlow bitişi
+    
+
 
 function getCategories() {
     const otherItems = MENU_DATA.filter(x => !x.isGununMenusu);
