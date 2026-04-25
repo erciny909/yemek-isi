@@ -496,8 +496,8 @@ const MENU_DATA = [
     },
 
     /* İstenen ürünler */
-    { id: 10, ad: "Yaprak Sarması", fiyat: "600", ozet: "KİLO İLE SATILIR.!", resim: "foto/yaprak.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false , onSiparis: true},
-    { id: 11, ad: "Lahana Sarması", fiyat: "500", ozet: "KİLO İLE SATILIR.!", resim: "foto/lahana.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false , onSiparis: true},
+    { id: 10, ad: "Yaprak Sarması", fiyat: "600", ozet: "KİLO İLE SATILIR.!", resim: "foto/yaprak.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
+    { id: 11, ad: "Lahana Sarması", fiyat: "500", ozet: "KİLO İLE SATILIR.!", resim: "foto/lahana.jpg.png", kategori: "Sarmalar/Dolmalar", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
 
     { id: 12, ad: "Ev Yapımı Mantı", fiyat: "500", ozet: "KİLO İLE SATILIR!", resim: "foto/mantı.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false , onSiparis: true,birim: "Adet / KG"},
     { id: 13, ad: "Mercimek Köftesi", fiyat: "300", ozet: "KİLO İLE SATILIR!", resim: "foto/mercimek.jpg.png", kategori: "Köfteler & Benzerleri", isGununMenusu: false ,birim: "Adet / KG", onSiparis: true},
@@ -791,7 +791,7 @@ const OrderFlow = {
         // 2. Ön Sipariş Uyarı Kontrolü
         const uyariHtml = yemekObj.onSiparis 
             ? `<div class="preorder-notice">
-                <strong>Tazelik Notu:</strong> Bu ürün size özel hazırlanmaktadır. 
+                <strong>Uyarı Notu:</strong> Bu ürün size özel hazırlanmaktadır. 
                 Hazırlık süreci ve teslimat saati teyidi için lütfen bizimle iletişime geçiniz.
                </div>` 
             : "";
@@ -834,7 +834,7 @@ const OrderFlow = {
             return n;
         };
 
-        // TEK BİR EVENT LISTENER BLOĞU
+        // Event Listener Bloğu
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) close();
 
@@ -846,12 +846,14 @@ const OrderFlow = {
 
             const action = e.target.getAttribute('data-action');
             if (action === 'cancel') close();
+            
             if (action === 'continue') {
                 const finalAdet = validateValue(input.value);
-                const onSiparisNotu = yemekObj.onSiparis ? " (Ön Sipariş)" : "";
+                const onSiparisNotu = yemekObj.onSiparis ? "" : "";
                 
+                // DÜZELTİLEN KISIM: Tekli siparişte "müsaitlik" sorusunu kaldırdık.
                 const msg = encodeURIComponent(
-                    `Merhaba, *${yemekObj.ad}* ürününden *${finalAdet} ${gosterilecekBirim}* sipariş vermek istiyorum.${onSiparisNotu} Müsaitlik durumunu öğrenebilir miyim?`
+                    `Merhaba, *${yemekObj.ad}* ürününden *${finalAdet} ${gosterilecekBirim}* sipariş vermek istiyorum.${onSiparisNotu}`
                 );
                 
                 const url = `https://wa.me/${WHATSAPP_NO}?text=${msg}`;
@@ -860,6 +862,7 @@ const OrderFlow = {
             }
         });
 
+        // Klavye desteği (Esc ile kapatma)
         const keyHandler = (e) => {
             if (e.key === 'Escape') {
                 close();
@@ -871,6 +874,7 @@ const OrderFlow = {
         document.body.appendChild(overlay);
         document.body.style.overflow = 'hidden';
 
+        // Input işlemleri
         if (input) {
             input.focus();
             input.select();
@@ -881,8 +885,8 @@ const OrderFlow = {
                 if (!e.target.value || e.target.value === "0") e.target.value = "1";
             });
         }
-    } // open bitişi
-}; // OrderFlow bitişi
+    }
+};
     
 
 
